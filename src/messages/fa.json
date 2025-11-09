@@ -1,0 +1,33 @@
+{
+  "Menu": {
+    "Home": "خانه",
+    "Services": "خدمات",
+    "Artists": "هنرمندان",
+    "Contact": "تماس با ما"
+  },
+  "Home": {
+    "title": "مهارت نقاشی خود را به سطح بالاتر ببرید"
+  },
+  "Services": {
+    "title": "خدمات ما",
+    "description": "متن توضیحات خدمات ما",
+    "metaTitle": "خدمات ما",
+    "metaDescription": "متن توضیحات خدمات ما"
+  },
+  "Artists": {
+    "title": "هنرمندان",
+    "description": "متن توضیحات هنرمندان",
+    "metaTitle": "هنرمندان",
+    "metaDescription": "متن توضیحات هنرمندان"
+  },
+  "Contact": {
+    "title": "تماس با ما",
+    "description": "متن توضیحات تماس با ما",
+    "metaTitle": "تماس با ما",
+    "metaDescription": "متن توضیحات تماس با ما"
+  },
+  "Error": {
+    "server": "ارتباط با سرور برقرار نشد.",
+    "client": "خطای کلاینت"
+  }
+}

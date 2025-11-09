@@ -1,0 +1,33 @@
+{
+  "Menu": {
+    "Home": "Home",
+    "Services": "Services",
+    "Artists": "Artists",
+    "Contact": "Contact"
+  },
+  "Home": {
+    "title": "Take Your Painting Skill To The Next Level"
+  },
+  "Services": {
+    "title": "Our Services",
+    "description": "Our Services description",
+    "metaTitle": "Our Services metaTitle",
+    "metaDescription": "Our Services metaDescription"
+  },
+  "Artists": {
+    "title": "Our Artists",
+    "description": "Our Artists description",
+    "metaTitle": "Our Artists metaTitle",
+    "metaDescription": "Our Artists metaDescription"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "description": "Contact Us description",
+    "metaTitle": "Contact Us metaTitle",
+    "metaDescription": "Contact Us metaDescription"
+  },
+  "Error": {
+    "server": "Server connection failed.",
+    "client": "Client error"
+  }
+}
