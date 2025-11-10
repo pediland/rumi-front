@@ -6,12 +6,16 @@ export interface CategoryResponse {
 }
 
 export interface Category {
-  id: number;
-  documentId: string;
-  slug: string;
+  attributes: {
+    servicesCount: number;
+  };
   createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
+  documentId: string;
+  icon: string;
+  id: number;
   locale: string;
+  publishedAt: string;
+  slug: string;
   title: string;
+  updatedAt: string;
 }

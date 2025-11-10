@@ -9,10 +9,16 @@
     "title": "مهارت نقاشی خود را به سطح بالاتر ببرید"
   },
   "Services": {
-    "title": "خدمات ما",
+    "title": "لیست خدمات",
     "description": "متن توضیحات خدمات ما",
     "metaTitle": "خدمات ما",
     "metaDescription": "متن توضیحات خدمات ما"
+  },
+  "Service": {
+    "title": "خدمات",
+    "description": "متن توضیحات خدمات",
+    "metaTitle": "خدمات",
+    "metaDescription": "متن توضیحات خدمات"
   },
   "Artists": {
     "title": "هنرمندان",

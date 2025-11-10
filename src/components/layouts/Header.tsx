@@ -2,8 +2,9 @@
 
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { Container } from "./Container";
+import { SelectLanguage } from "../global/SelectLanguage";
 
-import { Container, SelectLanguage } from "@/components";
 
 export const Header = () => {
   const t = useTranslations("Menu");
@@ -15,7 +16,7 @@ export const Header = () => {
           <Link href={`/`}>
             <h1 className="text-lg font-bold uppercase">Expat Kulturhaus</h1>
           </Link>
-          <div className="flex flex-1 justify-end gap-16">
+          <div className="flex flex-1 justify-end gap-10">
             <nav className="flex gap-10 font-medium">
               <Link href={`/`}>{t("Home")}</Link>
               <Link href={`/services`}>{t("Services")}</Link>

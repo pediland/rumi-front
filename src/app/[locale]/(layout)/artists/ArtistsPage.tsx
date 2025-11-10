@@ -6,8 +6,11 @@ import { Artist } from "@/types/artist";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
-import { Card, CardContent, Container, ErrorHint, Loader } from "@/components";
 import { Link } from "@/i18n/navigation";
+import { Loader } from "@/components/global/Loader";
+import { ErrorHint } from "@/components/global/ErrorHint";
+import { Container } from "@/components/layouts/Container";
+import { Card, CardContent } from "@/components/ui";
 
 export function ArtistsPage() {
   const t = useTranslations("Artists");

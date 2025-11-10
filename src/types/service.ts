@@ -18,6 +18,9 @@ export interface Service {
   documentId: string;
   fee: number;
   id: number;
+  image: {
+    url: string;
+  };
   locale: string;
   payment_note: string;
   publishedAt: string;

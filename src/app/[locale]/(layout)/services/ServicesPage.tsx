@@ -6,11 +6,15 @@ import { usePageHeadStore } from "@/store/usePageHeadStore";
 import { Category } from "@/types/category";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
-
-import { Container } from "@/components";
+import * as PhosphorIcons from "@phosphor-icons/react/dist/ssr";
+import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
+import { Loader } from "@/components/global/Loader";
+import { Container } from "@/components/layouts/Container";
 
 export default function ServicesPage() {
   const t = useTranslations("Services");
+  const locale = useLocale();
   const { setPageHead, resetPageHead } = usePageHeadStore();
 
   useEffect(() => {
@@ -21,18 +25,75 @@ export default function ServicesPage() {
   const { data, isLoading, error } = useStrapi("categories");
   const categories: Category[] = data?.data || [];
 
-  if (isLoading) return <p>Loading...</p>;
+  console.log(categories);
+
+  const backgrounds = [
+    {
+      src: "/images/cat-bg-1.svg",
+      color: "text-violet-500",
+    },
+    {
+      src: "/images/cat-bg-2.svg",
+      color: "text-rose-500",
+    },
+    {
+      src: "/images/cat-bg-3.svg",
+      color: "text-green-500",
+    },
+    {
+      src: "/images/cat-bg-4.svg",
+      color: "text-yellow-500",
+    },
+  ];
+
+  if (isLoading) return <Loader />;
 
   if (error) return <p>Error loading posts.</p>;
 
   return (
-    <Container>
-      <div className="grid grid-cols-4">
-        {categories.map((category) => (
-          <div key={category.id}>
-            <Link href={`/services/${category.slug}`}>{category.title}</Link>
-          </div>
-        ))}
+    <Container className="py-10">
+      <div className="flex justify-center gap-24">
+        {categories
+          .sort((a, b) => a.id - b.id)
+          .map((category, index) => {
+            const bg = backgrounds[index % backgrounds.length];
+            const IconComponent =
+              (PhosphorIcons as any)[category.icon] ||
+              PhosphorIcons.PaletteIcon;
+
+            return (
+              <div key={index} className="flex flex-col items-center gap-5 group">
+                <Link href={`/services/${category.slug}`}>
+                  <div
+                    className={`flex size-32 items-center justify-center rounded-full bg-cover bg-no-repeat ${bg.color}`}
+                    style={{
+                      backgroundImage: `url(${bg.src})`,
+                    }}
+                  >
+                    <IconComponent size={44} weight="duotone" />
+                  </div>
+                </Link>
+                <div className="flex flex-col items-center space-y-2.5">
+                  <Link
+                    href={`/services/${category.slug}`}
+                    className={cn(
+                      `flex items-center justify-center text-lg group-hover:text-blue-800`,
+                    )}
+                  >
+                    {category.title}
+                  </Link>
+                  <div
+                    className={cn(
+                      "text-muted-foreground flex size-9 items-center justify-center rounded-full bg-gray-100 font-medium",
+                      locale === "fa" && "pt-1",
+                    )}
+                  >
+                    {category?.attributes?.servicesCount}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </Container>
   );

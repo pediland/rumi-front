@@ -1,4 +1,6 @@
-import { Header, PageHead } from "@/components";
+import { Header } from "@/components/layouts/Header";
+import { PageHead } from "@/components/layouts/PageHead";
+
 
 interface InnerLayoutProps {
   children: React.ReactNode;
@@ -7,7 +9,7 @@ interface InnerLayoutProps {
 export default function InnerLayout({ children }: InnerLayoutProps) {
   return (
     <>
-      <div className="mask-repeat-no-repeat flex flex-col bg-linear-to-t from-pink-50 to-blue-100 mask-[url('/images/mask-hero.webp')] bg-cover bg-top mask-cover mask-bottom sm:h-72">
+      <div className="mask-repeat-no-repeat flex flex-col bg-linear-to-t from-violet-50/50 to-blue-100 mask-[url('/images/mask-hero.webp')] bg-cover bg-top mask-cover mask-bottom sm:h-72">
         <div className="flex flex-1 flex-col bg-[url('/images/mask-bg.webp')] bg-cover bg-center">
           <Header />
 

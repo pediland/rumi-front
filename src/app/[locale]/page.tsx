@@ -1,8 +1,9 @@
+import { Container } from "@/components/layouts/Container";
+import { Header } from "@/components/layouts/Header";
 import { cn } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
-import { Container, Header } from "@/components";
 
 export default function Home() {
   const t = useTranslations("Home");
