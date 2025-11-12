@@ -25,7 +25,7 @@ export const Header = ({ className }: HeaderProps) => {
               <Link href={`/`}>{t("Home")}</Link>
               <Link href={`/services`}>{t("Services")}</Link>
               <Link href={`/artists`}>{t("Artists")}</Link>
-              <Link href={`/contact`}>{t("Contact")}</Link>
+              {/* <Link href={`/contact`}>{t("Contact")}</Link> */}
             </nav>
 
             <SelectLanguage />

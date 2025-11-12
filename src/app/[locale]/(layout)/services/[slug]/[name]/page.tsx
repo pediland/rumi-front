@@ -15,11 +15,13 @@ import {
   CurrencyCircleDollarIcon,
   InfoIcon,
   MapPinLineIcon,
+  ReadCvLogoIcon,
   UsersIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { ServiceBreadcrumb } from "./ServiceBreadcrumb";
+import { Card } from "@/components/ui";
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
@@ -30,7 +32,17 @@ export default function ServiceDetailsPage() {
     isLoading,
     error,
   } = useStrapi("services", {
-    populate: "*",
+    populate: {
+      artists: {
+        populate: "*",
+      },
+      category: {
+        populate: "*",
+      },
+      image: {
+        populate: "*",
+      },
+    },
   });
 
   const serviceItem: Service | undefined = services?.data.find(
@@ -69,7 +81,9 @@ export default function ServiceDetailsPage() {
         <div className="grid grid-cols-12 items-start gap-10">
           <div className="col-span-8">
             <RichTextRenderer content={serviceItem.description} />
+
             <hr className="my-6" />
+
             <div className="space-y-4 text-[15px]">
               {serviceItem.payment_note && (
                 <div className="space-y-1">
@@ -99,17 +113,46 @@ export default function ServiceDetailsPage() {
                 </div>
               )}
             </div>
+
+            <div className="flex items-center gap-5 p-4">
+              <div className="shrink-0">
+                <Image
+                  src={`${serviceItem.artists[0]?.image?.url}`}
+                  alt={serviceItem.title}
+                  className="h-[180px] w-auto rounded"
+                  width={270}
+                  height={320}
+                  priority
+                />
+              </div>
+              <div className="space-y-2">
+                <h2 className="text-lg font-semibold">
+                  <Link
+                    href={`/artists/${serviceItem.artists[0].slug}`}
+                    className="text-primary hover:text-secondary flex items-center gap-1"
+                  >
+                    <ReadCvLogoIcon size={22} />
+                    {serviceItem.artists[0].title}
+                  </Link>
+                </h2>
+                <p className="text-muted-foreground line-clamp-5 leading-relaxed">
+                  {serviceItem.artists[0].intro_text}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="sticky top-5 col-span-4 -mt-44 space-y-4 rounded-md border border-gray-200/80 bg-white p-4 pb-1">
-            <Image
-              src={`${API_URL}/${serviceItem.image.url}`}
-              alt={serviceItem.title}
-              width={370}
-              height={250}
-              priority
-            />
-            <h2 className="text-lg font-bold">جزئیات کلاس:</h2>
+          <Card className="sticky top-5 col-span-4 -mt-44 pb-1">
+            <div>
+              <Image
+                src={`${serviceItem.image?.url}`}
+                alt={serviceItem.title}
+                width={370}
+                height={250}
+                priority
+              />
+            </div>
+            <h2 className="text-lg font-semibold">جزئیات کلاس:</h2>
 
             <div className="[&>div]:flex [&>div]:h-12 [&>div]:items-center [&>div]:justify-between [&>div]:border-t [&>div]:border-dashed [&>div]:border-gray-200 [&>div]:px-2 [&>div_svg]:text-teal-600">
               <div>
@@ -126,8 +169,11 @@ export default function ServiceDetailsPage() {
                   <ChalkboardTeacherIcon size={22} weight="duotone" />
                   <span className="font-medium">مدرس:</span>
                 </div>
-                <Link href={`/artists/${serviceItem.artists[0].slug}`}>
-                  {serviceItem.artists[0].full_name}
+                <Link
+                  href={`/artists/${serviceItem.artists[0].slug}`}
+                  className="hover:text-secondary"
+                >
+                  {serviceItem.artists[0].title}
                 </Link>
               </div>
               <div>
@@ -166,7 +212,7 @@ export default function ServiceDetailsPage() {
                 <div>{serviceItem.address}</div>
               </div>
             </div>
-          </div>
+          </Card>
         </div>
       </Container>
     </main>

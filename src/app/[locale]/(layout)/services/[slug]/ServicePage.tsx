@@ -18,6 +18,8 @@ import { Loader } from "@/components/global/Loader";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { Header } from "@/components/layouts/Header";
+import { PageHead } from "@/components/layouts/PageHead";
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
@@ -56,50 +58,66 @@ export default function ServicePage() {
       (service: Service) => service.category.slug === params.slug,
     ) || [];
 
+  console.log(servicesItems);
+
   if (servicesLoading || categoriesLoading) return <Loader />;
 
   if (servicesError || categoriesError) return <p>Error loading posts.</p>;
 
   return (
-    <Container>
-      <h1 className="text-lg font-bold"></h1>
+    <div>
+      <div className="flex flex-col border-b border-gray-100 bg-linear-to-t from-gray-50 to-gray-100 sm:h-60">
+        <div className="flex flex-1 flex-col bg-[url('/images/mask-bg.webp')] bg-cover bg-center pt-4">
+          <Header />
 
-      {servicesItems.length === 0 && <p>هیچ موردی در این دسته وجود ندارد.</p>}
-
-      <div className="grid grid-cols-4 gap-4">
-        {servicesItems.map((service) => (
-          <Card
-            key={service.id}
-            className="gap-0 rounded-md border-b-5 border-b-violet-200 p-0"
-          >
-            <CardHeader className="flex items-center justify-center p-0">
-              <Image
-                src={`${API_URL}${service.image.url}`}
-                className="rounded-t-md"
-                width={370}
-                height={250}
-                alt={service.title}
-              />
-            </CardHeader>
-            <CardContent className="space-y-2 p-5">
-              <h2 className="text-lg font-bold">{service.title}</h2>
-              <p className="text-muted-foreground text-[15px]">
-                {service.sub_title}
-              </p>
-            </CardContent>
-            <CardFooter className="p-5 pt-0">
-              <Button
-                asChild
-                className="w-full bg-violet-500/85 hover:bg-violet-500"
-              >
-                <Link href={`/services/${params.slug}/${service.slug}`}>
-                  مشاهده جزئیات
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+          <PageHead breadcrumb />
+        </div>
       </div>
-    </Container>
+
+      <main>
+        <Container>
+          <h1 className="text-lg font-bold"></h1>
+
+          {servicesItems.length === 0 && (
+            <p>هیچ موردی در این دسته وجود ندارد.</p>
+          )}
+
+          <div className="grid grid-cols-4 gap-4">
+            {servicesItems.map((service) => (
+              <Card
+                key={service.id}
+                className="border-b-primary/50 gap-0 border-b-5 p-0"
+              >
+                <CardHeader className="flex items-center justify-center p-0">
+                  <Image
+                    src={service.image?.url}
+                    className="rounded-t-md"
+                    width={370}
+                    height={250}
+                    alt={service.title}
+                  />
+                </CardHeader>
+                <CardContent className="space-y-2 p-5">
+                  <h2 className="text-lg font-semibold">{service.title}</h2>
+                  <p className="text-muted-foreground text-[15px]">
+                    {service.sub_title}
+                  </p>
+                </CardContent>
+                <CardFooter className="p-5 pt-0">
+                  <Button
+                    asChild
+                    className="bg-primary/90 hover:bg-primary w-full"
+                  >
+                    <Link href={`/services/${params.slug}/${service.slug}`}>
+                      مشاهده جزئیات
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </main>
+    </div>
   );
 }

@@ -46,7 +46,7 @@ export default function RichTextRenderer({ content }: { content: Node[] }) {
         const ListTag = node.format === "ordered" ? "ol" : "ul";
         return React.createElement(
           ListTag,
-          { key: index, className: "mb-4 list-disc space-y-1 pr-6" },
+          { key: index, className: "mb-4 list-disc space-y-1 pr-2" },
           node.children?.map(renderNode),
         );
       }

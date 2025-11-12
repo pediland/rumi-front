@@ -5,8 +5,13 @@ export interface Artist {
   locale: string;
   nationality: string;
   publishedAt: string;
+  image: {
+    url: string;
+  };
   resume: [];
   slug: string;
-  full_name: string;
+  title: string;
+  sub_title: string;
+  intro_text: string;
   updatedAt: string;
 }

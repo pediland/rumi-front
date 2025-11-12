@@ -6,18 +6,15 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
 
-interface ServiceBreadcrumbProps {
+interface SiteBreadcrumbProps {
   category: string;
   slug: string;
 }
 
-export const ServiceBreadcrumb = ({
-  category,
-  slug,
-}: ServiceBreadcrumbProps) => {
+export const SiteBreadcrumb = ({ category, slug }: SiteBreadcrumbProps) => {
   return (
     <Breadcrumb>
-      <BreadcrumbList>
+      <BreadcrumbList className="sm:gap-1.5">
         <BreadcrumbItem>
           <Link href="/" className="hover:text-foreground text-gray-400">
             خانه
@@ -30,15 +27,6 @@ export const ServiceBreadcrumb = ({
             className="hover:text-foreground text-gray-400"
           >
             خدمات
-          </Link>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator className="text-gray-400" />
-        <BreadcrumbItem>
-          <Link
-            href={`/services/${slug}`}
-            className="hover:text-foreground text-gray-400"
-          >
-            {category}
           </Link>
         </BreadcrumbItem>
       </BreadcrumbList>
