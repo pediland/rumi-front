@@ -1,23 +1,23 @@
 "use client";
 
+import { routing, usePathname, useRouter } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/navigation";
-import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
 
 const localeNames: Record<string, string> = {
   fa: "فارسی",
   en: "English",
 };
 
-export const SelectLanguage = () => {
+export const SelectLanguage = ({ imageStyle }: { imageStyle?: boolean }) => {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -32,12 +32,19 @@ export const SelectLanguage = () => {
   };
 
   if (!mounted) {
-    return <span className="text-muted-foreground">[ {localeNames[locale]} ]</span>;
+    return (
+      <span className="text-muted-foreground">[ {localeNames[locale]} ]</span>
+    );
   }
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="text-muted-foreground cursor-pointer">
+      <DropdownMenuTrigger
+        className={cn(
+          "text-muted-foreground cursor-pointer",
+          imageStyle && "text-white",
+        )}
+      >
         [ {localeNames[locale]} ]
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-auto">

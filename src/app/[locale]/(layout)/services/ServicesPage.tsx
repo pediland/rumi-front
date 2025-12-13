@@ -53,64 +53,55 @@ export default function ServicesPage() {
   if (error) return <p>Error loading posts.</p>;
 
   return (
-    <div>
-      <div className="flex flex-col border-b border-gray-100 bg-linear-to-t from-gray-50 to-gray-100 sm:h-60">
-        <div className="flex flex-1 flex-col bg-[url('/images/mask-bg.webp')] bg-cover bg-center pt-4">
-          <Header />
+    <main>
+      <Container className="py-10">
+        <div className="flex justify-center gap-24">
+          {categories
+            .sort((a, b) => a.id - b.id)
+            .map((category, index) => {
+              const bg = backgrounds[index % backgrounds.length];
+              const IconComponent =
+                (PhosphorIcons as any)[category.icon] ||
+                PhosphorIcons.PaletteIcon;
 
-          <PageHead />
-        </div>
-      </div>
-      <main>
-        <Container className="py-10">
-          <div className="flex justify-center gap-24">
-            {categories
-              .sort((a, b) => a.id - b.id)
-              .map((category, index) => {
-                const bg = backgrounds[index % backgrounds.length];
-                const IconComponent =
-                  (PhosphorIcons as any)[category.icon] ||
-                  PhosphorIcons.PaletteIcon;
-
-                return (
-                  <div
-                    key={index}
-                    className="group flex flex-col items-center gap-5"
-                  >
-                    <Link href={`/services/${category.slug}`}>
-                      <div
-                        className={`flex size-32 items-center justify-center rounded-full bg-cover bg-no-repeat ${bg.color}`}
-                        style={{
-                          backgroundImage: `url(${bg.src})`,
-                        }}
-                      >
-                        <IconComponent size={44} weight="duotone" />
-                      </div>
+              return (
+                <div
+                  key={index}
+                  className="group flex flex-col items-center gap-5"
+                >
+                  <Link href={`/services/${category.slug}`}>
+                    <div
+                      className={`flex size-32 items-center justify-center rounded-full bg-cover bg-no-repeat ${bg.color}`}
+                      style={{
+                        backgroundImage: `url(${bg.src})`,
+                      }}
+                    >
+                      <IconComponent size={44} weight="duotone" />
+                    </div>
+                  </Link>
+                  <div className="flex flex-col items-center space-y-2.5">
+                    <Link
+                      href={`/services/${category.slug}`}
+                      className={cn(
+                        `flex items-center justify-center text-lg group-hover:text-blue-800`,
+                      )}
+                    >
+                      {category.title}
                     </Link>
-                    <div className="flex flex-col items-center space-y-2.5">
-                      <Link
-                        href={`/services/${category.slug}`}
-                        className={cn(
-                          `flex items-center justify-center text-lg group-hover:text-blue-800`,
-                        )}
-                      >
-                        {category.title}
-                      </Link>
-                      <div
-                        className={cn(
-                          "text-muted-foreground flex size-9 items-center justify-center rounded-full bg-gray-100 font-medium",
-                          locale === "fa" && "pt-1",
-                        )}
-                      >
-                        {category?.attributes?.servicesCount}
-                      </div>
+                    <div
+                      className={cn(
+                        "text-muted-foreground flex size-9 items-center justify-center rounded-full bg-gray-100 font-medium",
+                        locale === "fa" && "pt-1",
+                      )}
+                    >
+                      {category?.attributes?.servicesCount}
                     </div>
                   </div>
-                );
-              })}
-          </div>
-        </Container>
-      </main>
-    </div>
+                </div>
+              );
+            })}
+        </div>
+      </Container>
+    </main>
   );
 }

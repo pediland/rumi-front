@@ -1,13 +1,22 @@
-import { Container } from "@/components/layouts/Container";
-import { Header } from "@/components/layouts/Header";
+"use client";
+
 import { cn } from "@/lib/utils";
+import { usePageHeadStore } from "@/store/usePageHeadStore";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import { useEffect } from "react";
 
+import { Container } from "@/components/layouts/Container";
+import { Header } from "@/components/layouts/Header";
 
 export default function Home() {
   const t = useTranslations("Home");
   const locale = useLocale();
+  const { resetPageHead } = usePageHeadStore();
+
+  useEffect(() => {
+    resetPageHead();
+  }, []);
 
   return (
     <main>

@@ -1,7 +1,7 @@
 {
   "Menu": {
     "Home": "خانه",
-    "Services": "خدمات",
+    "Programs": "برنامه‌ها",
     "Artists": "هنرمندان",
     "Contact": "تماس با ما"
   },
@@ -13,6 +13,12 @@
     "description": "متن توضیحات خدمات ما",
     "metaTitle": "خدمات ما",
     "metaDescription": "متن توضیحات خدمات ما"
+  },
+  "Programs": {
+    "title": "لیست برنامه ها",
+    "description": "متن توضیحات برنامه ها",
+    "metaTitle": "برنامه ها",
+    "metaDescription": "متن توضیحات برنامه ها"
   },
   "Service": {
     "title": "خدمات",

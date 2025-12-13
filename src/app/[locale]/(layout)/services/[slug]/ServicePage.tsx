@@ -1,7 +1,7 @@
 "use client";
 
 import { useStrapi } from "@/lib/useStrapi";
-import { Service } from "@/types/service";
+import { Service } from "@/types/program";
 import { useParams } from "next/navigation";
 import { Container } from "@/components/layouts/Container";
 import {

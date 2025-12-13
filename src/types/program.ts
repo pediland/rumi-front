@@ -2,28 +2,25 @@ import { Meta } from "./meta";
 import { Category } from "./category";
 import { Artist } from "./artist";
 
-export interface ServiceResponse {
-  data: Service[];
+export interface ProgramResponse {
+  data: Program[];
   meta: Meta;
 }
 
-export interface Service {
-  address: string;
+export interface Program {
   additional_note: string;
-  artists: Artist[];
+  address: string;
+  artist: Artist;
   capacity: number;
   category: Category;
   createdAt: string;
   days: string;
   description: [];
   documentId: string;
-  price: number;
   id: number;
-  image: {
-    url: string;
-  };
+  image: { url: string };
   locale: string;
-  payment_note: string;
+  price: number;
   publishedAt: string;
   sessions: number;
   slug: string;

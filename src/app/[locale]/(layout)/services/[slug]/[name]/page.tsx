@@ -6,7 +6,7 @@ import { Container } from "@/components/layouts/Container";
 import { Header } from "@/components/layouts/Header";
 import { Link } from "@/i18n/navigation";
 import { useStrapi } from "@/lib/useStrapi";
-import { Service } from "@/types/service";
+import { Service } from "@/types/program";
 import {
   CalendarCheckIcon,
   CalendarDotsIcon,
@@ -27,13 +27,14 @@ const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export default function ServiceDetailsPage() {
   const params = useParams();
+
   const {
     data: services,
     isLoading,
     error,
   } = useStrapi("services", {
     populate: {
-      artists: {
+      artist: {
         populate: "*",
       },
       category: {
@@ -117,7 +118,7 @@ export default function ServiceDetailsPage() {
             <div className="flex items-center gap-5 p-4">
               <div className="shrink-0">
                 <Image
-                  src={`${serviceItem.artists[0]?.image?.url}`}
+                  src={`${serviceItem.artist?.image?.url}`}
                   alt={serviceItem.title}
                   className="h-[180px] w-auto rounded"
                   width={270}
@@ -128,15 +129,15 @@ export default function ServiceDetailsPage() {
               <div className="space-y-2">
                 <h2 className="text-lg font-semibold">
                   <Link
-                    href={`/artists/${serviceItem.artists[0].slug}`}
+                    href={`/artists/${serviceItem?.artist?.slug}`}
                     className="text-primary hover:text-secondary flex items-center gap-1"
                   >
                     <ReadCvLogoIcon size={22} />
-                    {serviceItem.artists[0].title}
+                    {serviceItem?.artist?.title}
                   </Link>
                 </h2>
                 <p className="text-muted-foreground line-clamp-5 leading-relaxed">
-                  {serviceItem.artists[0].intro_text}
+                  {serviceItem?.artist?.intro_text}
                 </p>
               </div>
             </div>
@@ -170,10 +171,10 @@ export default function ServiceDetailsPage() {
                   <span className="font-medium">مدرس:</span>
                 </div>
                 <Link
-                  href={`/artists/${serviceItem.artists[0].slug}`}
+                  href={`/artists/${serviceItem?.artist?.slug}`}
                   className="hover:text-secondary"
                 >
-                  {serviceItem.artists[0].title}
+                  {serviceItem?.artist?.title}
                 </Link>
               </div>
               <div>
