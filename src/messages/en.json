@@ -1,4 +1,10 @@
 {
+  "Metadata": {
+    "title": "RUMI Haus",
+    "description": "Art and Culture House",
+    "programsMetaTitle": "Our Programs",
+    "rumiHausMetaTitle": "RUMI Haus"
+  },
   "Menu": {
     "Home": "Home",
     "Programs": "Programs",
@@ -31,6 +37,7 @@
   },
   "Error": {
     "server": "Server connection failed.",
+    "notFound": "Not found",
     "client": "Client error"
   }
 }

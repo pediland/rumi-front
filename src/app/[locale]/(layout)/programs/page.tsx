@@ -4,11 +4,10 @@ import { getTranslations } from "next-intl/server";
 import ProgramsPage from "./components/ProgramsPage";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("Programs");
+  const t = await getTranslations("Metadata");
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title: `${t("programsMetaTitle")} | ${t("rumiHausMetaTitle")}`,
   };
 }
 

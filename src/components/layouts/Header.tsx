@@ -39,7 +39,7 @@ export const Header = ({ className }: HeaderProps) => {
       <div
         className={cn(
           "flex items-center justify-center",
-          imageStyle ? "z-10 h-20" : "h-16",
+          imageStyle ? "z-10 h-20" : "h-[70px]",
         )}
       >
         <Container>

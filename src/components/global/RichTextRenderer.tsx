@@ -30,7 +30,10 @@ export default function RichTextRenderer({ content }: { content: Node[] }) {
         const Tag = `h${level}` as const;
         return React.createElement(
           Tag,
-          { key: index, className: "mt-6 mb-2 text-xl font-semibold" },
+          {
+            key: index,
+            className: "mt-6 mb-2 text-xl font-semibold first:mt-0",
+          },
           node.children?.map(renderNode),
         );
       }

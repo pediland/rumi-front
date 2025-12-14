@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 import { Container } from "@/components/layouts/Container";
-import { Header } from "@/components/layouts/Header";
 
 export default function Home() {
   const t = useTranslations("Home");
@@ -22,8 +21,6 @@ export default function Home() {
     <main>
       <div className="mask-repeat-no-repeat flex flex-col bg-[url('/images/bg-hero.svg')] mask-[url('/images/mask-hero.webp')] bg-cover mask-cover mask-right sm:h-[95vh]">
         <div className="flex flex-1 flex-col bg-[url('/images/mask-bg.webp')] pt-4">
-          <Header />
-
           <div className="flex flex-1 gap-10">
             <Container className="py-0">
               <div className="grid h-full grid-cols-2 items-center gap-10">

@@ -1,4 +1,6 @@
 "use client";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 import {
   Breadcrumb,
@@ -6,18 +8,12 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 
 interface ProgramBreadcrumbProps {
   category: string;
-  slug: string;
 }
 
-export const ProgramBreadcrumb = ({
-  category,
-  slug,
-}: ProgramBreadcrumbProps) => {
+export const ProgramBreadcrumb = ({ category }: ProgramBreadcrumbProps) => {
   const t = useTranslations("Breadcrumbs");
 
   return (
@@ -37,6 +33,8 @@ export const ProgramBreadcrumb = ({
             {t("programs")}
           </Link>
         </BreadcrumbItem>
+        <BreadcrumbSeparator className="text-gray-400" />
+        <BreadcrumbItem>{category}</BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
   );
