@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { Container } from "./Container";
 import { usePageHeadStore } from "@/store/usePageHeadStore";
 import { useLocale } from "next-intl";
-import { SiteBreadcrumb } from "./Breadcrumb";
 
 export function PageHead({ breadcrumb }: { breadcrumb?: boolean }) {
   const { title, description } = usePageHeadStore();
@@ -22,8 +21,6 @@ export function PageHead({ breadcrumb }: { breadcrumb?: boolean }) {
           >
             {title}
           </h1>
-
-          {breadcrumb && <SiteBreadcrumb category={title} slug={title} />}
         </div>
       </Container>
     </div>
