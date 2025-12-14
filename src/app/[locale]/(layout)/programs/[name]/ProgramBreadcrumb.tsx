@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,40 +7,34 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
-interface ServiceBreadcrumbProps {
+interface ProgramBreadcrumbProps {
   category: string;
   slug: string;
 }
 
-export const ServiceBreadcrumb = ({
+export const ProgramBreadcrumb = ({
   category,
   slug,
-}: ServiceBreadcrumbProps) => {
+}: ProgramBreadcrumbProps) => {
+  const t = useTranslations("Breadcrumbs");
+
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <Link href="/" className="hover:text-foreground text-gray-400">
-            خانه
+            {t("home")}
           </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator className="text-gray-400" />
         <BreadcrumbItem>
           <Link
-            href="/services"
+            href="/programs"
             className="hover:text-foreground text-gray-400"
           >
-            خدمات
-          </Link>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator className="text-gray-400" />
-        <BreadcrumbItem>
-          <Link
-            href={`/services/${slug}`}
-            className="hover:text-foreground text-gray-400"
-          >
-            {category}
+            {t("programs")}
           </Link>
         </BreadcrumbItem>
       </BreadcrumbList>

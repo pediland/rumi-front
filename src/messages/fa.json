@@ -1,4 +1,11 @@
 {
+  "Breadcrumbs": {
+    "home": "خانه",
+    "programs": "برنامه ها",
+    "services": "خدمات",
+    "artists": "هنرمندان",
+    "contact": "تماس با ما"
+  },
   "Menu": {
     "Home": "خانه",
     "Programs": "برنامه‌ها",
@@ -15,10 +22,13 @@
     "metaDescription": "متن توضیحات خدمات ما"
   },
   "Programs": {
-    "title": "لیست برنامه ها",
-    "description": "متن توضیحات برنامه ها",
+    "all": "همه",
+    "noPrograms": "برنامه ای وجود ندارد.",
+    "noProgramsInCategory": "برنامه ای در دسته {categoryTitle} وجود ندارد.",
+    "title": "لیست بـرنـامـه‌هـا",
+    "description": "لیست بـرنـامـه‌هـا",
     "metaTitle": "برنامه ها",
-    "metaDescription": "متن توضیحات برنامه ها"
+    "metaDescription": "لیست بـرنـامـه‌هـا"
   },
   "Service": {
     "title": "خدمات",

@@ -1,12 +1,16 @@
 "use client";
 
+import { usePageHeadStore } from "@/store/usePageHeadStore";
+import { useEffect } from "react";
+import { Program } from "@/types/program";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { Link } from "@/i18n/navigation";
+import { useStrapi } from "@/lib/useStrapi";
+
 import { Loader } from "@/components/global/Loader";
 import RichTextRenderer from "@/components/global/RichTextRenderer";
 import { Container } from "@/components/layouts/Container";
-import { Header } from "@/components/layouts/Header";
-import { Link } from "@/i18n/navigation";
-import { useStrapi } from "@/lib/useStrapi";
-import { Service } from "@/types/program";
 import {
   CalendarCheckIcon,
   CalendarDotsIcon,
@@ -18,21 +22,26 @@ import {
   ReadCvLogoIcon,
   UsersIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import Image from "next/image";
-import { useParams } from "next/navigation";
-import { ServiceBreadcrumb } from "./ServiceBreadcrumb";
+import { ProgramBreadcrumb } from "./ProgramBreadcrumb";
 import { Card } from "@/components/ui";
+
+import placeholder from "@/assets/images/program-image.webp";
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export default function ServiceDetailsPage() {
   const params = useParams();
+  const { resetPageHead } = usePageHeadStore();
+
+  useEffect(() => {
+    resetPageHead();
+  }, []);
 
   const {
-    data: services,
+    data: programs,
     isLoading,
     error,
-  } = useStrapi("services", {
+  } = useStrapi("programs", {
     populate: {
       artist: {
         populate: "*",
@@ -46,61 +55,44 @@ export default function ServiceDetailsPage() {
     },
   });
 
-  const serviceItem: Service | undefined = services?.data.find(
-    (service: Service) => service.slug === params.name,
+  const programItem: Program | undefined = programs?.data.find(
+    (program: Program) => program.slug === params.name,
   );
 
-  console.log(serviceItem);
+  console.log(programItem);
 
   if (isLoading) return <Loader />;
 
   if (error) return <p>Error loading posts.</p>;
 
-  if (!serviceItem) return <p>Service not found.</p>;
+  if (!programItem) return <p>Service not found.</p>;
 
   return (
     <main className="pb-10">
-      <div className="bg-linear-to-t from-white to-violet-100">
-        <Header className="pt-4" />
-        <Container className="py-20">
-          <div className="col-span-8">
-            <div className="space-y-3">
-              <ServiceBreadcrumb
-                category={serviceItem.category.title}
-                slug={serviceItem.category.slug}
-              />
-              <h1 className="text-3xl font-extrabold">{serviceItem.title}</h1>
-              <p className="text-muted-foreground text-lg">
-                {serviceItem.sub_title}
-              </p>
-            </div>
+      <Container className="py-16">
+        <div className="col-span-8">
+          <div className="space-y-3">
+            <ProgramBreadcrumb
+              category={programItem.category.title}
+              slug={programItem.category.slug}
+            />
+            <h1 className="text-3xl font-extrabold">{programItem.title}</h1>
+            <p className="text-muted-foreground text-lg">
+              {programItem.sub_title}
+            </p>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
 
       <Container className="py-0">
         <div className="grid grid-cols-12 items-start gap-10">
           <div className="col-span-8">
-            <RichTextRenderer content={serviceItem.description} />
+            <RichTextRenderer content={programItem.description} />
 
             <hr className="my-6" />
 
             <div className="space-y-4 text-[15px]">
-              {serviceItem.payment_note && (
-                <div className="space-y-1">
-                  <div className="flex items-center gap-1">
-                    <InfoIcon
-                      size={18}
-                      weight="duotone"
-                      className="text-yellow-600"
-                    />
-                    <span className="font-bold">توضیحات پرداخت:</span>
-                  </div>
-                  <div className="pr-5">{serviceItem.payment_note}</div>
-                </div>
-              )}
-
-              {serviceItem.additional_note && (
+              {programItem.additional_note && (
                 <div className="space-y-1">
                   <div className="flex items-center gap-1">
                     <InfoIcon
@@ -110,7 +102,7 @@ export default function ServiceDetailsPage() {
                     />
                     <span className="font-bold">توضیحات اضافی:</span>
                   </div>
-                  <div className="pr-5">{serviceItem.additional_note}</div>
+                  <div className="pr-5">{programItem.additional_note}</div>
                 </div>
               )}
             </div>
@@ -118,8 +110,8 @@ export default function ServiceDetailsPage() {
             <div className="flex items-center gap-5 p-4">
               <div className="shrink-0">
                 <Image
-                  src={`${serviceItem.artist?.image?.url}`}
-                  alt={serviceItem.title}
+                  src={programItem.artist?.image?.url}
+                  alt={programItem.title}
                   className="h-[180px] w-auto rounded"
                   width={270}
                   height={320}
@@ -129,15 +121,15 @@ export default function ServiceDetailsPage() {
               <div className="space-y-2">
                 <h2 className="text-lg font-semibold">
                   <Link
-                    href={`/artists/${serviceItem?.artist?.slug}`}
+                    href={`/artists/${programItem?.artist?.slug}`}
                     className="text-primary hover:text-secondary flex items-center gap-1"
                   >
                     <ReadCvLogoIcon size={22} />
-                    {serviceItem?.artist?.title}
+                    {programItem?.artist?.title}
                   </Link>
                 </h2>
                 <p className="text-muted-foreground line-clamp-5 leading-relaxed">
-                  {serviceItem?.artist?.intro_text}
+                  {programItem?.artist?.intro_text}
                 </p>
               </div>
             </div>
@@ -146,8 +138,8 @@ export default function ServiceDetailsPage() {
           <Card className="sticky top-5 col-span-4 -mt-44 pb-1">
             <div>
               <Image
-                src={`${serviceItem.image?.url}`}
-                alt={serviceItem.title}
+                src={programItem.image?.url || placeholder}
+                alt={programItem.title}
                 width={370}
                 height={250}
                 priority
@@ -162,7 +154,7 @@ export default function ServiceDetailsPage() {
                   <span className="font-medium">قیمت:</span>
                 </div>
                 <div className="text-lg font-bold text-rose-600">
-                  €{serviceItem.price}
+                  €{programItem.price}
                 </div>
               </div>
               <div>
@@ -171,10 +163,10 @@ export default function ServiceDetailsPage() {
                   <span className="font-medium">مدرس:</span>
                 </div>
                 <Link
-                  href={`/artists/${serviceItem?.artist?.slug}`}
+                  href={`/artists/${programItem?.artist?.slug}`}
                   className="hover:text-secondary"
                 >
-                  {serviceItem?.artist?.title}
+                  {programItem?.artist?.title}
                 </Link>
               </div>
               <div>
@@ -182,35 +174,35 @@ export default function ServiceDetailsPage() {
                   <CopySimpleIcon size={22} weight="duotone" />
                   <span className="font-medium">تعداد جلسات:</span>
                 </div>
-                <div>{serviceItem.sessions} جلسه</div>
+                <div>{programItem.sessions} جلسه</div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <CalendarCheckIcon size={22} weight="duotone" />
                   <span className="font-medium">روزهای برگزاری:</span>
                 </div>
-                <div>{serviceItem.days}</div>
+                <div>{programItem.days}</div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <CalendarDotsIcon size={22} weight="duotone" />
                   <span className="font-medium">تاریخ شروع:</span>
                 </div>
-                {new Date(serviceItem.start_date).toLocaleDateString("en-GB")}
+                {new Date(programItem.start_date).toLocaleDateString("en-GB")}
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <UsersIcon size={22} weight="duotone" />
                   <span className="font-medium">ظرفیت:</span>
                 </div>
-                {serviceItem.capacity} نفر
+                {programItem.capacity} نفر
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <MapPinLineIcon size={22} weight="duotone" />
                   <span className="font-medium">محل برگزاری:</span>
                 </div>
-                <div>{serviceItem.address}</div>
+                <div>{programItem.address}</div>
               </div>
             </div>
           </Card>

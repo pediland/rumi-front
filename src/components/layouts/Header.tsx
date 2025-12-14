@@ -2,13 +2,15 @@
 
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { usePageHeadStore } from "@/store/usePageHeadStore";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 import { SelectLanguage } from "@/components/global/SelectLanguage";
 import { Container } from "./Container";
-import { usePageHeadStore } from "@/store/usePageHeadStore";
+
 import logo from "@/assets/images/logo.png";
-import Image from "next/image";
+import logoDark from "@/assets/images/logo-dark.png";
 
 interface HeaderProps {
   className?: string;
@@ -37,13 +39,18 @@ export const Header = ({ className }: HeaderProps) => {
       <div
         className={cn(
           "flex items-center justify-center",
-          imageStyle ? "z-10 h-20" : "h-14",
+          imageStyle ? "z-10 h-20" : "h-16",
         )}
       >
         <Container>
           <div className="flex items-center justify-between">
             <Link href={`/`}>
-              <Image src={logo} alt="Rumi Haus" width={150} height={60} />
+              <Image
+                src={imageStyle ? logo : logoDark}
+                alt="Rumi Haus"
+                width={150}
+                height={60}
+              />
             </Link>
             <div className="flex flex-1 justify-end gap-10">
               <nav

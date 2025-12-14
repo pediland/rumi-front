@@ -1,15 +1,17 @@
 "use client";
 
+import { Link } from "@/i18n/navigation";
 import { useStrapi } from "@/lib/useStrapi";
 import { usePageHeadStore } from "@/store/usePageHeadStore";
 import { Program } from "@/types/program";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Loader } from "@/components/global/Loader";
 import { Container } from "@/components/layouts/Container";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CategoriesFilter } from "./CategoriesFilter";
 
@@ -17,6 +19,7 @@ import backgroundImage from "@/assets/images/bg-programs-01.webp";
 import placeholder from "@/assets/images/program-image.webp";
 
 export default function ProgramsPage() {
+  const t = useTranslations("Programs");
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [categoryTitle, setCategoryTitle] = useState<string>("");
 
@@ -24,7 +27,7 @@ export default function ProgramsPage() {
 
   useEffect(() => {
     setPageHead({
-      title: "بـرنـامـه‌هـا",
+      title: t("title"),
       backgroundImage: backgroundImage.src,
     });
   }, [setPageHead]);
@@ -44,6 +47,8 @@ export default function ProgramsPage() {
           (program: Program) => program.category?.id === selectedCategory,
         ) || [];
 
+  const noItems = programsItems.length === 0;
+
   if (isLoading) return <Loader />;
 
   if (error) return <p>خطایی رخ داده است.</p>;
@@ -51,24 +56,26 @@ export default function ProgramsPage() {
   return (
     <main className="space-y-8 py-8">
       <CategoriesFilter
+        selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         setCategoryTitle={setCategoryTitle}
+        noItems={noItems}
       />
 
       <Container>
-        {programsItems.length === 0 && (
-          <p>
+        {noItems && (
+          <p className="text-muted-foreground text-center">
             {categoryTitle !== ""
-              ? `هیچ برنامه‌ای در دسته ${categoryTitle} وجود ندارد.`
-              : "هیچ برنامه‌ای وجود ندارد."}
+              ? t("noProgramsInCategory", { categoryTitle })
+              : t("noPrograms")}
           </p>
         )}
 
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid gap-5 sm:grid-cols-4">
           {programsItems.map((program) => (
             <Card
               key={program.id}
-              className="border-b-primary/50 gap-0 border-b-5 p-0"
+              className="border-b-primary/50 gap-0 rounded-none border-b-5 p-0"
             >
               <CardHeader className="flex items-center justify-center p-0">
                 <Image
@@ -80,11 +87,10 @@ export default function ProgramsPage() {
                 />
               </CardHeader>
               <CardContent className="space-y-2 p-5">
-                <div>{program.category?.title}</div>
-                <h2 className="text-lg font-semibold">{program.title}</h2>
-                <p className="text-muted-foreground text-[15px]">
-                  {program.sub_title}
-                </p>
+                <Badge variant="outline">{program.category?.title}</Badge>
+                <h2 className="line-clamp-1 text-lg font-semibold">
+                  {program.title}
+                </h2>
               </CardContent>
               <CardFooter className="p-5 pt-0">
                 <Button

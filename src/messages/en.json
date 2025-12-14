@@ -1,18 +1,21 @@
 {
   "Menu": {
     "Home": "Home",
-    "Services": "Services",
+    "Programs": "Programs",
     "Artists": "Artists",
     "Contact": "Contact"
   },
   "Home": {
     "title": "Take Your Painting Skill To The Next Level"
   },
-  "Services": {
-    "title": "Our Services",
-    "description": "Our Services description",
-    "metaTitle": "Our Services metaTitle",
-    "metaDescription": "Our Services metaDescription"
+  "Programs": {
+    "all": "All",
+    "noPrograms": "No programs found.",
+    "noProgramsInCategory": "No programs found in category {categoryTitle}",
+    "title": "Our Programs",
+    "description": "Our Programs description",
+    "metaTitle": "Our Programs metaTitle",
+    "metaDescription": "Our Programs metaDescription"
   },
   "Artists": {
     "title": "Our Artists",

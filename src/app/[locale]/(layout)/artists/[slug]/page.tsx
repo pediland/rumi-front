@@ -7,9 +7,17 @@ import { Artist } from "@/types/artist";
 import RichTextRenderer from "@/components/global/RichTextRenderer";
 import { Header } from "@/components/layouts/Header";
 import Image from "next/image";
+import { usePageHeadStore } from "@/store/usePageHeadStore";
+import { useEffect } from "react";
 
 export default function ArtistDetailsPage() {
   const params = useParams();
+  const { resetPageHead } = usePageHeadStore();
+
+  useEffect(() => {
+    resetPageHead();
+  }, []);
+
   const {
     data: artists,
     isLoading,
@@ -31,35 +39,31 @@ export default function ArtistDetailsPage() {
   if (!artistItem) return <p>Artist not found.</p>;
 
   return (
-    <main className="pb-10">
-      <div className="bg-linear-to-t from-white to-violet-100">
-        <Header className="pt-4" />
-
-        <Container>
-          <div className="grid grid-cols-5 gap-8">
-            <div className="col-span-1 space-y-3">
-              <div>
-                <Image
-                  src={artistItem.image.url}
-                  className="rounded"
-                  alt={artistItem.title}
-                  width={270}
-                  height={320}
-                />
-              </div>
-              <div className="text-center">
-                <h2 className="text-primary text-lg font-semibold">
-                  {artistItem.title}
-                </h2>
-                <p>ملیت: {artistItem.nationality}</p>
-              </div>
+    <main className="py-10">
+      <Container>
+        <div className="grid grid-cols-5 gap-8">
+          <div className="col-span-1 space-y-3">
+            <div>
+              <Image
+                src={artistItem.image.url}
+                className="rounded"
+                alt={artistItem.title}
+                width={270}
+                height={320}
+              />
             </div>
-            <div className="col-span-4">
-              <RichTextRenderer content={artistItem.resume} />
+            <div className="text-center">
+              <h2 className="text-primary text-lg font-semibold">
+                {artistItem.title}
+              </h2>
+              <p>ملیت: {artistItem.nationality}</p>
             </div>
           </div>
-        </Container>
-      </div>
+          <div className="col-span-4">
+            <RichTextRenderer content={artistItem.resume} />
+          </div>
+        </div>
+      </Container>
     </main>
   );
 }
