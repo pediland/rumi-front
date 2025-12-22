@@ -1,6 +1,9 @@
-import { CheckFatIcon } from "@phosphor-icons/react/dist/ssr";
+"use client";
+
+import { useLocale } from "next-intl";
 import React from "react";
 
+import { CheckFatIcon } from "@phosphor-icons/react/dist/ssr";
 interface Node {
   type: string;
   level?: number;
@@ -15,6 +18,8 @@ interface Node {
 }
 
 export default function RichTextRenderer({ content }: { content: Node[] }) {
+  const locale = useLocale();
+
   if (!content) return null;
 
   const renderNode = (node: Node, index: number): React.ReactNode => {
@@ -49,7 +54,7 @@ export default function RichTextRenderer({ content }: { content: Node[] }) {
         const ListTag = node.format === "ordered" ? "ol" : "ul";
         return React.createElement(
           ListTag,
-          { key: index, className: "mb-4 list-disc space-y-1 pr-2" },
+          { key: index, className: "mb-4 list-disc space-y-1 sm:pr-2" },
           node.children?.map(renderNode),
         );
       }
@@ -108,7 +113,10 @@ export default function RichTextRenderer({ content }: { content: Node[] }) {
   };
 
   return (
-    <div dir="rtl" className="prose prose-lg max-w-none">
+    <div
+      dir={locale === "fa" ? "rtl" : "ltr"}
+      className="prose prose-lg max-w-none"
+    >
       {content.map((node, i) => renderNode(node, i))}
     </div>
   );

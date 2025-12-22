@@ -5,6 +5,12 @@
     "programsMetaTitle": "Our Programs",
     "rumiHausMetaTitle": "RUMI Haus"
   },
+  "Breadcrumbs": {
+    "home": "Home",
+    "programs": "Programs",
+    "artists": "Artists",
+    "contact": "Contact"
+  },
   "Menu": {
     "Home": "Home",
     "Programs": "Programs",
@@ -16,12 +22,19 @@
   },
   "Programs": {
     "all": "All",
+    "capacity": "Capacity",
+    "days": "Days",
+    "description": "Our Programs description",
+    "location": "Location",
+    "metaDescription": "Our Programs metaDescription",
+    "metaTitle": "Our Programs metaTitle",
     "noPrograms": "No programs found.",
     "noProgramsInCategory": "No programs found in category {categoryTitle}",
+    "price": "Price",
+    "sessions": "Sessions",
+    "startDate": "Start Date",
     "title": "Our Programs",
-    "description": "Our Programs description",
-    "metaTitle": "Our Programs metaTitle",
-    "metaDescription": "Our Programs metaDescription"
+    "tutor": "Tutor"
   },
   "Artists": {
     "title": "Our Artists",

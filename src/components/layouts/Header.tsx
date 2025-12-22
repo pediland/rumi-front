@@ -26,7 +26,7 @@ export const Header = ({ className }: HeaderProps) => {
       className={cn(
         className,
         imageStyle &&
-          "relative flex min-h-[360px] flex-col bg-cover bg-center bg-no-repeat",
+          "relative flex min-h-[360px] w-full flex-col bg-red-300 bg-cover bg-center bg-no-repeat",
       )}
       {...(imageStyle && {
         style: { backgroundImage: `url(${backgroundImage})` },
@@ -52,16 +52,17 @@ export const Header = ({ className }: HeaderProps) => {
                 height={60}
               />
             </Link>
+
             <div className="flex flex-1 justify-end gap-10">
               <nav
                 className={cn(
-                  "flex gap-10 font-medium",
+                  "hidden gap-10 font-medium sm:flex",
                   imageStyle && "text-white",
                 )}
               >
                 <Link href={`/`}>{t("Home")}</Link>
                 <Link href={`/programs`}>{t("Programs")}</Link>
-                <Link href={`/artists`}>{t("Artists")}</Link>
+                {/* <Link href={`/artists`}>{t("Artists")}</Link> */}
                 <Link href={`/contact`}>{t("Contact")}</Link>
               </nav>
 

@@ -13,19 +13,19 @@ export const ProgramArtistInfo = ({ programItem }: ProgramArtistInfoProps) => {
   if (!programItem?.artist) return null;
 
   return (
-    <Card className="flex-row items-center bg-gray-50 p-5 shadow-none">
-      <div className="shrink-0">
+    <Card className="flex flex-row items-center gap-3 bg-gray-50 p-4 shadow-none sm:gap-4 sm:p-5">
+      <div className="flex h-full shrink-0 bg-red-100">
         <Image
           src={programItem.artist?.image?.url}
           alt={programItem.title}
-          className="aspect-square w-36 rounded-md object-cover"
+          className="aspect-square w-24 rounded-md object-cover sm:w-36"
           width={270}
           height={320}
           priority
         />
       </div>
       <div className="space-y-2">
-        <h2 className="text-lg font-semibold">
+        <h2 className="font-semibold sm:text-lg">
           <Link
             href={`/artists/${programItem?.artist?.slug}`}
             className="text-primary hover:text-secondary flex items-center gap-1"
@@ -34,7 +34,7 @@ export const ProgramArtistInfo = ({ programItem }: ProgramArtistInfoProps) => {
             {programItem?.artist?.title}
           </Link>
         </h2>
-        <p className="line-clamp-4 text-[15px] leading-relaxed text-gray-600">
+        <p className="line-clamp-3 text-sm leading-relaxed text-gray-600 sm:line-clamp-4 sm:text-[15px]">
           {programItem?.artist?.intro_text}
         </p>
       </div>

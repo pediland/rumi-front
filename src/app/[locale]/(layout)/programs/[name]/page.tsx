@@ -59,24 +59,22 @@ export default function ProgramDetailsPage() {
   if (!program) return <ErrorHint type="not-found" />;
 
   return (
-    <main className="pb-10">
+    <main className="pb-5 sm:pb-10">
       {hasGallery && <ProgramGallery gallery={gallery} />}
 
       <Container className={cn(hasGallery ? "py-8" : "py-16")}>
-        <div className="col-span-8">
-          <div className="space-y-3">
-            <ProgramBreadcrumb category={program.category.title} />
-            <h1 className="text-secondary text-3xl font-extrabold">
-              {program.title}
-            </h1>
-            <p className="text-muted-foreground text-lg">{program.sub_title}</p>
-          </div>
+        <div className="space-y-3">
+          <ProgramBreadcrumb category={program.category.title} />
+          <h1 className="text-secondary text-3xl font-extrabold">
+            {program.title}
+          </h1>
+          <p className="text-muted-foreground text-lg">{program.sub_title}</p>
         </div>
       </Container>
 
       <Container className="py-0">
-        <div className="grid grid-cols-3 items-start gap-6">
-          <div className="col-span-2">
+        <div className="grid items-start gap-6 sm:grid-cols-3">
+          <div className="order-2 sm:col-span-2">
             <RichTextRenderer content={program.description} />
 
             <hr className="my-6" />

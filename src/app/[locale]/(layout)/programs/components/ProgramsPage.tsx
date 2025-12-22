@@ -49,7 +49,7 @@ export default function ProgramsPage() {
   if (error) return <ErrorHint type="server" />;
 
   return (
-    <main className="space-y-6 py-6">
+    <main className="space-y-4 py-4 sm:space-y-6 sm:py-6">
       {!noItems && (
         <CategoriesFilter
           selectedCategory={selectedCategory}
@@ -59,7 +59,7 @@ export default function ProgramsPage() {
       )}
 
       <Container>
-        <div className="grid gap-5 sm:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-4 sm:gap-5">
           {isLoading && <ProgramsSkeleton />}
 
           {!isLoading &&

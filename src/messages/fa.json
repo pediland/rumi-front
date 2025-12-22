@@ -29,12 +29,19 @@
   },
   "Programs": {
     "all": "همه",
+    "capacity": "ظرفیت",
+    "days": "روزهای برگزاری",
+    "description": "لیست بـرنـامـه‌هـا",
+    "location": "محل برگزاری",
+    "metaDescription": "لیست بـرنـامـه‌هـا",
+    "metaTitle": "برنامه ها",
     "noPrograms": "برنامه ای وجود ندارد.",
     "noProgramsInCategory": "برنامه ای در دسته {categoryTitle} وجود ندارد.",
+    "price": "قیمت",
+    "sessions": "تعداد جلسات",
+    "startDate": "تاریخ شروع",
     "title": "لیست بـرنـامـه‌هـا",
-    "description": "لیست بـرنـامـه‌هـا",
-    "metaTitle": "برنامه ها",
-    "metaDescription": "لیست بـرنـامـه‌هـا"
+    "tutor": "مدرس"
   },
   "Service": {
     "title": "خدمات",

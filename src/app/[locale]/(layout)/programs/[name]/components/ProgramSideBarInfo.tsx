@@ -15,6 +15,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 
 import placeholder from "@/assets/images/program-image.webp";
+import { useTranslations } from "next-intl";
 
 interface ProgramSideBarInfoProps {
   programItem: Program;
@@ -25,11 +26,13 @@ export const ProgramSideBarInfo = ({
   programItem,
   hasGallery,
 }: ProgramSideBarInfoProps) => {
+  const t = useTranslations("Programs");
+
   return (
     <Card
       className={cn(
-        "sticky top-5 col-span-1 gap-2 border-none p-0 pb-1 shadow-none",
-        hasGallery ? "-mt-40" : "-mt-44",
+        "order-1 gap-2 border-none p-0 pb-1 shadow-none sm:sticky sm:top-4 sm:order-2 sm:col-span-1",
+        hasGallery ? "sm:-mt-40" : "sm:-mt-44",
       )}
     >
       {!hasGallery && (
@@ -49,7 +52,7 @@ export const ProgramSideBarInfo = ({
         <div>
           <div className="flex items-center gap-2">
             <CurrencyCircleDollarIcon size={22} weight="duotone" />
-            <span className="font-medium">قیمت:</span>
+            <span className="font-medium">{t("price")}:</span>
           </div>
           <div className="text-lg font-bold text-rose-600">
             €{programItem.price}
@@ -58,7 +61,7 @@ export const ProgramSideBarInfo = ({
         <div>
           <div className="flex items-center gap-2">
             <ChalkboardTeacherIcon size={22} weight="duotone" />
-            <span className="font-medium">مدرس:</span>
+            <span className="font-medium">{t("tutor")}:</span>
           </div>
           <Link
             href={`/artists/${programItem?.artist?.slug}`}
@@ -70,35 +73,35 @@ export const ProgramSideBarInfo = ({
         <div>
           <div className="flex items-center gap-2">
             <CopySimpleIcon size={22} weight="duotone" />
-            <span className="font-medium">تعداد جلسات:</span>
+            <span className="font-medium">{t("sessions")}:</span>
           </div>
-          <div>{programItem.sessions} جلسه</div>
+          <div>{programItem.sessions}</div>
         </div>
         <div>
           <div className="flex items-center gap-2">
             <CalendarCheckIcon size={22} weight="duotone" />
-            <span className="font-medium">روزهای برگزاری:</span>
+            <span className="font-medium">{t("days")}:</span>
           </div>
           <div>{programItem.days}</div>
         </div>
         <div>
           <div className="flex items-center gap-2">
             <CalendarDotsIcon size={22} weight="duotone" />
-            <span className="font-medium">تاریخ شروع:</span>
+            <span className="font-medium">{t("startDate")}:</span>
           </div>
           {new Date(programItem.start_date).toLocaleDateString("en-GB")}
         </div>
         <div>
           <div className="flex items-center gap-2">
             <UsersIcon size={22} weight="duotone" />
-            <span className="font-medium">ظرفیت:</span>
+            <span className="font-medium">{t("capacity")}:</span>
           </div>
-          {programItem.capacity} نفر
+          {programItem.capacity}
         </div>
         <div>
           <div className="flex items-center gap-2">
             <MapPinLineIcon size={22} weight="duotone" />
-            <span className="font-medium">محل برگزاری:</span>
+            <span className="font-medium">{t("location")}:</span>
           </div>
           <div>{programItem.address}</div>
         </div>

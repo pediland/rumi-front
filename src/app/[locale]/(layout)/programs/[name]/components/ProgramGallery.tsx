@@ -1,7 +1,7 @@
-import { Container } from "@/components/layouts/Container";
 import { ImageType } from "@/types/gallery";
 import Image from "next/image";
 
+import { Container } from "@/components/layouts/Container";
 interface ProgramGalleryProps {
   gallery: ImageType[];
 }
@@ -14,16 +14,14 @@ export const ProgramGallery = ({ gallery }: ProgramGalleryProps) => {
   return (
     <Container>
       <div className="grid grid-cols-3 gap-4 overflow-hidden">
-        {/* تصویر اصلی */}
         <div
-          className="col-span-2 rounded-lg bg-cover bg-center"
+          className="col-span-3 aspect-square rounded-lg bg-cover bg-center sm:col-span-2 sm:aspect-auto"
           style={{
             backgroundImage: `url(${coverImage.url})`,
           }}
         />
 
-        {/* بقیه تصاویر (بدون index 0) */}
-        <div className="col-span-1 grid grid-cols-2 grid-rows-2 gap-4">
+        <div className="col-span-3 grid grid-cols-2 grid-rows-2 gap-4 sm:col-span-1">
           {thumbnails.map((item, index) => (
             <Image
               key={item.id ?? index}
